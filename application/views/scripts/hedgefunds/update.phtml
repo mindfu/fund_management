@@ -1,0 +1,239 @@
+<?php
+$elements = $this->form->getElements();
+?>
+
+
+
+
+
+<div class="row">
+	<div class="col-lg-12">
+		<h1><?php echo $this->fund_name?></h1>
+		<ol class="breadcrumb">
+			<li>
+				<a href="/"> <i class="icon-home"></i> Home</a>
+			</li>
+			<li>
+				<a href="/hedgefunds/"> <i class="icon-table"></i> Hedge Funds</a>
+			</li>
+			<li class="active">
+				<i class="icon-table"></i> Setup HedgeFund
+			</li>
+			
+		</ol>
+	</div>
+	<div class="alert alert-info alert-dismissable">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+			Use the Tab to navigate through different sections. Section marked with * have required fields.
+	</div>
+</div>
+
+<form role="form" action="/hedgefunds/save" method="POST" id="hedgefund_update_form">
+	
+		
+	<?php
+		echo $this->form->id->renderViewHelper();
+	?>
+	<div class="row">
+		<div id="save_result"></div>
+		<div class="container-fluid clear-fix" style="clear:both;margin-bottom:15px;">
+			<button class="btn btn-primary" type="submit">Save New Fund</button>
+		</div>
+	</div>
+	
+	<ul id="myTab" class="nav nav-tabs" style="margin-bottom:15px">
+	    <li class="active"><a href="#basic" data-toggle="tab">Basic Information *</a></li>
+	    <li class=""><a href="#info_2" data-toggle="tab">Information 2 *</a></li>
+	    <li class=""><a href="#people" data-toggle="tab">People</a></li>
+	    <li class=""><a href="#others" data-toggle="tab">Others</a></li>
+	    <li class=""><a href="#fund_performances" data-toggle="tab">Performance</a></li>
+	    
+	    
+	  </ul>
+	 
+	<div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active in" id="basic">
+        	<div class="row">
+        		<div class="col-lg-4">
+        			<?php 
+					$basic_info = array("fund_name", "general_partner_fname", "general_partner_lname", "general_partner_title", "manager_fname", "manager_lname", "manager_title", "street_1", "street_2", "city", "state", "country_id", "continent_id", "phone", "fax", "email", "contact_person_fname", "contact_person_lname", "contact_person_title");
+					foreach($elements as $element){
+						if (!in_array($element->getName(), $basic_info)){
+							continue;
+						}
+						?>
+						<div class="form-group">
+							
+							<label for="<?php echo $element->getName()?>"><?php echo $element->getLabel()?>
+								<?php
+									if ($element->isRequired()){
+										?>
+										<span style="color:#ff0000">*</span>
+										<?php
+									}
+								?>
+								
+							</label>
+							<?php echo $element->renderViewHelper()?>
+						</div>	
+						<?php
+					}
+					?>
+        		</div>
+
+        	</div>
+        
+        
+        </div>
+        <div class="tab-pane fade" id="info_2">
+        	<div class="row">
+        		<div class="col-lg-4">
+        			<?php 
+					$in_elements = array("firm_assets", "fund_assets", "primary_strategy", "secondary_strategy", "secondary_strategy_2", "description", "onshore_offshore", "return_start", "minimum_investment", "management_fee", "incentive_fee", "early_redemption_fee", "other_fee", "capital_addition", "capital_redemption", "lockup", "hurdle_rate", "high_watermark");
+					foreach($elements as $element){
+						if (!in_array($element->getName(), $in_elements)){
+							continue;
+						}
+						?>
+						<div class="form-group">
+							<label for="<?php echo $element->getName()?>"><?php echo $element->getLabel()?>
+								<?php
+									if ($element->isRequired()){
+										?>
+										<span style="color:#ff0000">*</span>
+										<?php
+									}
+								?>
+							</label><br/>
+							<?php echo $element->renderViewHelper()?>
+						</div>	
+						<?php
+					}
+					?>
+        		</div>
+        	</div>
+        </div>
+        <div class="tab-pane fade" id="people">
+        	<div class="row">
+        		<div class="col-lg-4">
+        			<?php 
+						$in_elements = array("legal_counsel_fname", "legal_counsel_lname", "legal_counsel_title", "administrator_fname", "administrator_lname", "administrator_title", "custodian_fname", "custodian_lname", "custodian_title", "accountant_fname", "accountant_lname", "accountant_title", "prime_broker_fname", "prime_broker_lname", "prime_broker_title");
+						
+						
+						foreach($elements as $element){
+							if (!in_array($element->getName(), $in_elements)){
+								continue;
+							}
+							?>
+							<div class="form-group">
+								<label for="<?php echo $element->getName()?>"><?php echo $element->getLabel()?>
+									<?php
+										if ($element->isRequired()){
+											?>
+											<span style="color:#ff0000">*</span>
+											<?php
+										}
+									?>
+								</label><br/>
+								<?php echo $element->renderViewHelper()?>
+							</div>	
+							<?php
+						}
+						?>
+        		</div>
+        	</div>
+        
+        </div>
+        <div class="tab-pane fade" id="others">
+        	<div class="row">
+        		<div class="col-lg-4">
+        				<?php 
+						$in_elements = array("typical_net_exposure_low", "typical_net_exposure_high", "typical_percent_long_low", "typical_percent_long_high", "currency_class", "location_of_components", "open_to_investment", "assets_in_strategy", "investment_market", "investment_style", "investment_geography", "lehman_hfn_index_participant");
+						
+						
+						foreach($elements as $element){
+							if (!in_array($element->getName(), $in_elements)){
+								continue;
+							}
+							?>
+							<div class="form-group">
+								<label for="<?php echo $element->getName()?>"><?php echo $element->getLabel()?>
+									<?php
+										if ($element->isRequired()){
+											?>
+											<span style="color:#ff0000">*</span>
+											<?php
+										}
+									?>
+									
+								</label><br/>
+								<?php echo $element->renderViewHelper()?>
+							</div>	
+							<?php
+						}
+						?>
+        			
+        			
+        		</div>
+        	</div>
+        
+        </div>
+        <div class="tab-pane fade" id="fund_performances">
+        	<div class="row">
+        		<?php
+        			$months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+        		?>
+        		<h4 align="center">Monthly Performance (%) Net of Fees</h4>
+        		<div class="alert alert-info">
+			        <strong>Heads up!</strong> Please enter numerical values. Values are auto-saved after blur.  
+			      </div>
+        		<table class="table table-bordered table-hover table-striped">
+	        		<thead>
+						<tr>
+							<th>Year</th>
+							<?php
+								foreach($months as $month){
+									?>
+									<th><?php echo $month?></th>
+									<?php
+								}
+							?>
+						</tr>
+					</thead>
+        			<tbody>
+	        			<?php
+		        			$start = intval(date("Y"));
+		        			for($i=$start;$i>=2000;$i--){
+		        				?>
+		        				<tr>
+		        					<td><?php echo $i?></td>
+		        					<?php
+		        					
+										foreach($months as $month){?>
+											<?php
+													$value = "";
+													foreach($this->fund_percs as $fund_perc){
+														if ($fund_perc["month"]==$month&&$fund_perc["year"]==$i&&$fund_perc["fund_id"]==$this->form->id->getValue()){
+															$value = round($fund_perc["value"], 2);
+														}
+													}
+					        					
+											?>
+											
+											
+											<td><input type="text" class="form-control monthly_performance" data-month="<?php echo $month?>" data-year="<?php echo $i?>" data-fund_id="<?php echo $this->form->id->getValue()?>" value="<?php echo $value?>"/></td>
+											<?php
+										}?>
+								
+		        				</tr>
+		        				<?php
+		        			}
+		        		?>	
+        			</tbody>
+        		</table>
+        	
+        	</div>
+        </div>
+      </div>
+
+</form>
